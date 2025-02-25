@@ -1,4 +1,4 @@
-# Brand System Dev Container
+# Dev Container
 
 このプロジェクトは、Dockerを使用してJava 17、Maven、およびOracle 19cをサポートする開発環境を構築するための設定を含んでいます。
 
