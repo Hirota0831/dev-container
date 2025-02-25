@@ -1,0 +1,17 @@
+services:
+  devcontainer:
+    image: mcr.microsoft.com/devcontainers/java:1-17-bookworm
+    env_file:
+      - .env  # `.env` を明示的に指定
+    volumes:
+      # ホストの src/ ディレクトリをコンテナの /workspace/src にマウント
+      # .env で定義された LOCAL_SRC_DIR の値を使用する
+      - "${LOCAL_SRC_DIR}:/workspace/src"
+
+      # ホストの oracle-db/ ディレクトリをコンテナの /workspace/oracle-db にマウント
+      # .env で定義された LOCAL_ORACLE_DB_DIR の値を使用する
+      - "${LOCAL_ORACLE_DB_DIR}:/workspace/oracle-db"
+
+      # スクリプトディレクトリをマウント（init-db.sh など）
+      - "${LOCAL_SCRIPTS_DIR}:/workspace/scripts"
+    command: [ "tail", "-f", "/dev/null" ]
