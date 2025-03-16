@@ -48,8 +48,26 @@
         // 改行コードをLFに設定
         "files.eol": "\n",
         // 文字コードをUTF-8に設定
-        "files.encoding": "utf8"
-      },
+        "files.encoding": "utf8",
+        "editor.quickSuggestions": {
+          "other": true,
+          "comments": false,
+          "strings": true
+        },
+        "editor.suggestOnTriggerCharacters": true,
+        "editor.acceptSuggestionOnCommitCharacter": true,
+        "editor.acceptSuggestionOnEnter": "on",
+        "java.completion.enabled": true,
+        "java.completion.filteredTypes": [],
+        "java.completion.importOrder": [
+            "java",
+            "javax",
+            "com",
+            "org"
+        ],
+        "java.completion.overwrite": true,
+        "java.completion.guessMethodArguments": true
+        },
       "extensions": [
         "ms-java-pack",
         "ms-azuretools.vscode-docker",
