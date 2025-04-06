@@ -1,77 +1,42 @@
 {
-  // このDev ContainerはJava 17とOracle 19cを使用し、Docker outside of Docker (DooD) を有効にする
   "name": "Brand System Dev Container",
-    
-  // `docker-compose.override.yml` を適用
-  "dockerComposeFile": ["./docker-compose.yml", "./docker-compose.override.yml"],
-
-  // `service` を指定し、`docker-compose.override.yml` の `services.devcontainer` と一致させる
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
   "service": "devcontainer",
-
-  // Dev Container 起動時に /workspace/ を開くように設定
-  "workspaceFolder": "/workspace/",
-
+  "workspaceFolder": "/workspaces/brand-dev-container",
   "features": {
     "ghcr.io/devcontainers/features/java:1": {
-      // Java のバージョンを none に設定し、Maven 3.8.2 をインストール
-      // この Dev Container は Java 17 の公式イメージ（mcr.microsoft.com/devcontainers/java:1-17-bookworm）
-      // を使用しているため、ここで Java のバージョンを指定する必要はありません。
       "version": "none",
       "installMaven": "true",
       "mavenVersion": "3.8.2",
       "installGradle": "false"
     }
   },
-
-  // ホスト（Windows）からコンテナ内の Oracle 19c データベース（ポート1521）にアクセスできるようにする
+  "mounts": [
+    "source=${env:USERPROFILE}\\.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+  ],
   "forwardPorts": [
     1521
   ],
-
   "containerEnv": {
-    // 環境変数の設定（JavaとMavenのパス）
     "JAVA_HOME": "/usr/lib/jvm/java-17-openjdk",
     "MAVEN_HOME": "/usr/share/maven",
     "ORACLE_SID": "${ORACLE_SID}",
     "ORACLE_PDB": "${ORACLE_PDB}",
     "ORACLE_PWD": "${ORACLE_PWD}"
   },
-
-  "remoteUser": "vscode",
-
-  // コンテナ起動後にDBのセットアップスクリプトを実行
-  "postStartCommand": "/bin/sh -c '/workspace/scripts/init-db.sh'",
-
   "customizations": {
     "vscode": {
       "settings": {
-        // 改行コードをLFに設定
         "files.eol": "\n",
-        // 文字コードをUTF-8に設定
-        "files.encoding": "utf8",
-        "editor.quickSuggestions": {
-          "other": true,
-          "comments": false,
-          "strings": true
-        },
-        "editor.suggestOnTriggerCharacters": true,
-        "editor.acceptSuggestionOnCommitCharacter": true,
-        "editor.acceptSuggestionOnEnter": "on",
-        "java.completion.enabled": true,
-        "java.completion.filteredTypes": [],
-        "java.completion.importOrder": [
-            "java",
-            "javax",
-            "com",
-            "org"
-        ],
-        "java.completion.overwrite": true,
-        "java.completion.guessMethodArguments": true
-        },
+        "files.encoding": "utf8"
+      },
       "extensions": [
         "ms-java-pack",
         "ms-azuretools.vscode-docker",
         "microsoft.vscode-database",
+        "cucumberopen.cucumber-official",
         "mtxr.sqltools"
       ]
     }
