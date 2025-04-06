@@ -12,7 +12,7 @@ repos=(
   "tree-sitter-ruby"
   "tree-sitter-c-sharp"
   "tree-sitter-php"
-  "tree-sitter-tsx"
+  # "tree-sitter-tsx"
 )
 
 for repo in "${repos[@]}"; do
