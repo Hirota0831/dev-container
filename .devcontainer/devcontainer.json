@@ -3,6 +3,7 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
+  "remoteUser": "root",
   "service": "devcontainer",
   "workspaceFolder": "/workspaces/brand-dev-container",
   "features": {

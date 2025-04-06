@@ -25,5 +25,6 @@ RUN npm install -g tree-sitter-cli@0.22.6
 COPY scripts/build-tree-sitter-parsers.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/build-tree-sitter-parsers.sh
 
-# Dev Container ビルド時にパーサをすべてビルドする
-RUN /usr/local/bin/build-tree-sitter-parsers.sh
+# Dev Container ビルド時にパーサをすべてビルド（不要な prebuilds を削除しておく）
+RUN /usr/local/bin/build-tree-sitter-parsers.sh && \
+    find /root/.cucumber/implementation -type d -name "prebuilds" -exec rm -rf {} +

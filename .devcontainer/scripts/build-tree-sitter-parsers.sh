@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euxo pipefail
+set -e
 
 BASE_DIR=/root/.cucumber/implementation
 mkdir -p "$BASE_DIR"
@@ -10,9 +10,9 @@ repos=(
   "tree-sitter-javascript"
   "tree-sitter-python"
   "tree-sitter-ruby"
-  # "tree-sitter-c-sharp"
+  "tree-sitter-c-sharp"
   "tree-sitter-php"
-  # "tree-sitter-tsx"
+  "tree-sitter-tsx"
 )
 
 for repo in "${repos[@]}"; do
@@ -31,6 +31,9 @@ for repo in "${repos[@]}"; do
 
   echo "Rebuilding native module..."
   npm rebuild || node-gyp rebuild || true
+
+  # 不要な prebuilds を削除（誤ロード防止）
+  find node_modules/tree-sitter -type d -name "prebuilds" -exec rm -rf {} + || true
 
   cd "$BASE_DIR"
 done
