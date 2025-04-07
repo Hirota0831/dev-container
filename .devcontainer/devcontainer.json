@@ -14,9 +14,6 @@
       "installGradle": "false"
     }
   },
-  "mounts": [
-    "source=${env:USERPROFILE}\\.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
-  ],
   "forwardPorts": [
     1521
   ],
@@ -31,15 +28,29 @@
     "vscode": {
       "settings": {
         "files.eol": "\n",
-        "files.encoding": "utf8"
-      },
-      "extensions": [
-        "ms-java-pack",
-        "ms-azuretools.vscode-docker",
-        "microsoft.vscode-database",
-        "cucumberopen.cucumber-official",
-        "mtxr.sqltools"
-      ]
+        "files.encoding": "utf8",
+        "cucumberautocomplete.steps": [
+          "*/**/src/test/java/**/*.java"
+        ],
+        "cucumberautocomplete.glue": [
+          "com.example.app.steps"
+        ],
+        "cucumberautocomplete.syncfeatures": "src/test/resources/features/**/*.feature",
+        "cucumberautocomplete.strictGherkinCompletion": true,
+        "cucumberautocomplete.smartSnippets": true,
+        "cucumberautocomplete.snippets": {
+          "Given": "Given(\"{step}\", () -> {\n    // TODO\n});",
+          "When": "When(\"{step}\", () -> {\n    // TODO\n});",
+          "Then": "Then(\"{step}\", () -> {\n    // TODO\n});"
+        },
+        "extensions": [
+          "ms-java-pack",
+          "ms-azuretools.vscode-docker",
+          "microsoft.vscode-database",
+          "alexkrechik.cucumberautocomplete",
+          "mtxr.sqltools"
+        ]
+      }
     }
   }
 }

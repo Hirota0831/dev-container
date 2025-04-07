@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "java",
+        "name": "Run Cucumber Scenario",
+        "request": "launch",
+        "mainClass": "io.cucumber.core.cli.Main",
+        "projectName": "your-project-name",
+        "args": "--plugin pretty --glue test.java.com.example.app.steps src/test/resources/**/*.feature"
+      }
+    ]
+  }
+  
